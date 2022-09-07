@@ -1,0 +1,11 @@
+spring.cloud.stream:
+  functions:
+    definition: consumerModel
+  bindings:
+    consumerModel-in-0:
+      destination: companies
+  kafka:
+    binder:
+      brokers:
+        - localhost:9092
+server.port:  8082
