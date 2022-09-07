@@ -27,7 +27,7 @@ dependencies {
     implementation 'com.h2database:h2:1.4.200'
     implementation 'org.apache.kafka:kafka-streams'
     implementation 'org.springframework.cloud:spring-cloud-stream'
-    implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka'
+    implementation 'org.springframework.cloud:spring-cloud-stream-binder-kafka-streams'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

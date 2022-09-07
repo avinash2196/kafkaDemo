@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 public class KafkaService {
     private final KafkaProducer kafkaProducer;
     private final KafkaRepository kafkaRepository;
+
     public void sendMessage(KafkaModel kafkaModel) {
-      log.info("data is : {}",kafkaModel);
-      kafkaProducer.produce(kafkaModel);
-        KafkaData kafkaData=new KafkaData();
+        log.info("data is : {}", kafkaModel);
+        kafkaProducer.sendMessage(String.valueOf(kafkaModel));
+        KafkaData kafkaData = new KafkaData();
         kafkaData.setData(kafkaModel.getData());
-      kafkaRepository.save(kafkaData);
+        kafkaRepository.save(kafkaData);
 
 
     }

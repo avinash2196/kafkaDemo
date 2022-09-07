@@ -2,8 +2,7 @@ package org.demo.stream;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.demo.model.KafkaModel;
-import org.springframework.cloud.stream.function.StreamBridge;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,10 +10,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class KafkaProducer {
     private static final String topic = "companies";
-    private final StreamBridge bridge;
 
-    public void produce(KafkaModel model) {
-        bridge.send(topic, model);
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public void sendMessage(String message) {
+        kafkaTemplate.send("companies", message)
+                .addCallback(
+                        result -> log.info("Message sent to topic: {}", message),
+                        ex -> log.error("Failed to send message", ex)
+                );
     }
-
 }
+
