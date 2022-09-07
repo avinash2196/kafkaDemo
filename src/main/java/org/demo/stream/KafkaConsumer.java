@@ -1,16 +1,20 @@
 package org.demo.stream;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.demo.model.KafkaModel;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+import java.util.function.Consumer;
+
+@Configuration
 @Slf4j
 public class KafkaConsumer {
-    @KafkaListener(topics = "companies", groupId = "group_id")
-    public void consume(String data)
-    {
-        log.info("Incoming Message - Consuming -> {}", data);
+
+    @Bean
+    Consumer<KafkaModel> receive() {
+
+        return s -> System.out.println("Received Model: " + s);
+
     }
 }
